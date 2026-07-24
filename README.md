@@ -112,6 +112,9 @@ ai-customer-support-agent/
 │   ├── banner.png
 │   └── logo-horizontal.png
 │
+├── customer-support-form/
+│   └── index.html
+│
 ├── screenshots/
 │   ├── workflow.png
 │   ├── form.png
@@ -121,8 +124,8 @@ ai-customer-support-agent/
 ├── workflows/
 │   └── customer-support-workflow.json
 │
-├── index.html
 ├── README.md
+├── CHANGELOG.md
 ├── LICENSE
 └── .gitignore
 ```
