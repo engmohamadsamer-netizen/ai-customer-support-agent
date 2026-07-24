@@ -14,17 +14,29 @@
 
 An end-to-end AI Customer Support workflow built with **n8n**, **Google Gemini**, **Google Sheets**, and **Gmail**.
 
-The workflow automatically receives customer inquiries through a responsive HTML form, generates intelligent AI responses using Google Gemini, stores every conversation in Google Sheets, and sends professional email replies via Gmail — all without human intervention.
+The workflow automatically receives customer inquiries through a responsive HTML form, generates intelligent AI responses using Google Gemini, stores every conversation in Google Sheets, and sends professional HTML email replies via Gmail — all without human intervention.
 
 This project demonstrates how modern AI automation can replace repetitive customer support tasks while maintaining professional communication and complete conversation history.
 
 ---
 
-## 🏗 Workflow Architecture
+# ⭐ Project Highlights
+
+- 🤖 End-to-end AI customer support automation
+- 📧 Professional HTML email generation
+- 📊 Google Sheets conversation logging
+- ⚡ Fully automated n8n workflow
+- 🌐 Responsive HTML customer portal
+- 🧩 Modular workflow ready for future expansion
+
+---
+
+# 🏗 Workflow Architecture
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/screenshots/workflow.png" width="100%">
 </p>
+
 ---
 
 # ✨ Features
@@ -37,7 +49,7 @@ This project demonstrates how modern AI automation can replace repetitive custom
 | 📊 Google Sheets | Automatically stores every conversation |
 | 📧 Gmail Integration | Sends professional HTML email replies |
 | 📁 Clean Data Processing | Customer data normalization before AI processing |
-| ♻️ Reusable Workflow | Easily adaptable to any business |
+| ♻️ Modular Workflow | Easily adaptable and expandable |
 
 ---
 
@@ -48,6 +60,7 @@ This project demonstrates how modern AI automation can replace repetitive custom
 <p align="center">
 <img src="https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/screenshots/form.png" width="80%">
 </p>
+
 ---
 
 ### Google Sheets Conversation Log
@@ -97,12 +110,13 @@ ai-customer-support-agent/
 │
 ├── assets/
 │   ├── banner.png
-│   ├── logo-horizontal.png
-│   └── screenshots/
-│       ├── workflow.png
-│       ├── form.png
-│       ├── google-sheet.png
-│       └── email.png
+│   └── logo-horizontal.png
+│
+├── screenshots/
+│   ├── workflow.png
+│   ├── form.png
+│   ├── google-sheet.png
+│   └── email.png
 │
 ├── workflows/
 │   └── customer-support-workflow.json
@@ -118,12 +132,12 @@ ai-customer-support-agent/
 # 🛠 Tech Stack
 
 - n8n
-- Google Gemini
+- Google Gemini API
 - Gmail API
 - Google Sheets API
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript (ES6)
 
 ---
 
@@ -137,7 +151,7 @@ git clone https://github.com/engmohamadsamer-netizen/ai-customer-support-agent.g
 
 ---
 
-## Open the project
+## Navigate to the project
 
 ```bash
 cd ai-customer-support-agent
@@ -147,7 +161,7 @@ cd ai-customer-support-agent
 
 ## Import the Workflow
 
-Import the following file into your n8n instance:
+Import the following workflow into your n8n instance:
 
 ```text
 workflows/customer-support-workflow.json
@@ -157,7 +171,7 @@ workflows/customer-support-workflow.json
 
 ## Configure Credentials
 
-Reconnect your own credentials inside n8n:
+Reconnect your own credentials inside n8n before running the workflow.
 
 - Google Gemini
 - Gmail
@@ -165,9 +179,9 @@ Reconnect your own credentials inside n8n:
 
 ---
 
-## Update Webhook URL
+## Update the Webhook URL
 
-Open
+Open:
 
 ```text
 index.html
@@ -177,7 +191,7 @@ Replace the Webhook URL with your own n8n Webhook endpoint.
 
 ---
 
-## Run
+## Run the Project
 
 Execute the workflow inside n8n.
 
@@ -187,7 +201,7 @@ Open:
 index.html
 ```
 
-Submit a customer request and watch the workflow execute automatically.
+Submit a customer request from the HTML form and watch the entire automation execute in real time.
 
 ---
 
@@ -241,13 +255,8 @@ See the **LICENSE** file for more information.
 
 **Mohamad Samer**
 
-GitHub Profile
-
-https://github.com/engmohamadsamer-netizen
-
-Project Repository
-
-https://github.com/engmohamadsamer-netizen/ai-customer-support-agent
+- GitHub: https://github.com/engmohamadsamer-netizen
+- Project: https://github.com/engmohamadsamer-netizen/ai-customer-support-agent
 
 ---
 
