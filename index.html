@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OXIVAR AI | AI Customer Support Agent</title>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#f4f7fb;
+}
+
+.container{
+width:430px;
+margin:60px auto;
+background:#fff;
+padding:35px;
+border-radius:14px;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.logo{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo img{
+width:220px;
+}
+
+h2{
+margin:0;
+text-align:center;
+color:#1f3b63;
+font-size:34px;
+}
+
+.subtitle{
+margin:12px 0 30px;
+text-align:center;
+font-size:15px;
+line-height:1.6;
+color:#666;
+}
+
+label{
+display:block;
+margin-bottom:7px;
+font-weight:bold;
+color:#444;
+}
+
+input,
+textarea{
+width:100%;
+padding:13px;
+margin-bottom:18px;
+border:1px solid #d7dde7;
+border-radius:8px;
+font-size:15px;
+box-sizing:border-box;
+transition:.25s;
+}
+
+input:focus,
+textarea:focus{
+outline:none;
+border-color:#1f5fbf;
+box-shadow:0 0 0 3px rgba(31,95,191,.15);
+}
+
+textarea{
+height:140px;
+resize:vertical;
+}
+
+button{
+width:100%;
+padding:14px;
+background:#1f5fbf;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:.25s;
+}
+
+button:hover{
+background:#184d99;
+}
+
+.success{
+display:none;
+margin-top:20px;
+padding:14px;
+border-radius:8px;
+background:#eaf8ef;
+color:#207245;
+text-align:center;
+font-weight:bold;
+}
+
+.footer{
+margin-top:28px;
+text-align:center;
+font-size:13px;
+color:#888;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+
+<img src="https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/assets/logo-horizontal.png">
+</div>
+
+<h2>AI Customer Support Agent</h2>
+
+<div class="subtitle">
+
+Get instant answers about OXIVAR AI services, automation solutions, and business support.
+
+</div>
+
+<form id="supportForm">
+
+<label>Full Name</label>
+
+<input
+type="text"
+name="name"
+placeholder="Enter your full name"
+required>
+
+<label>Email Address</label>
+
+<input
+type="email"
+name="email"
+placeholder="Enter your email address"
+required>
+
+<label>Your Question</label>
+
+<textarea
+name="question"
+placeholder="Type your question here..."
+required></textarea>
+
+<button type="submit">
+
+Ask AI Assistant
+
+</button>
+
+</form>
+
+<div class="success" id="success">
+
+✅ Your message has been sent successfully.
+
+</div>
+
+<div class="footer">
+
+© 2026 OXIVAR AI. All rights reserved.
+
+</div>
+
+</div>
+
+<script>
+
+const form = document.getElementById("supportForm");
+
+form.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+const data = {
+
+name: form.name.value,
+email: form.email.value,
+question: form.question.value
+
+};
+
+await fetch("http://localhost:5678/webhook-test/customer-support", {
+
+method: "POST",
+
+headers: {
+
+"Content-Type": "application/json"
+
+},
+
+body: JSON.stringify(data)
+
+});
+
+form.reset();
+
+document.getElementById("success").style.display = "block";
+
+});
+
+</script>
+
+</body>
+</html>
