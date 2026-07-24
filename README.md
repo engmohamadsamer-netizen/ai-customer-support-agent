@@ -20,10 +20,11 @@ This project demonstrates how modern AI automation can replace repetitive custom
 
 ---
 
-# 🏗 Workflow Architecture
+## 🏗 Workflow Architecture
 
-![Workflow](assets/screenshots/workflow.png)
-
+<p align="center">
+<img src="https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/screenshots/workflow.png" width="100%">
+</p>
 ---
 
 # ✨ Features
@@ -42,21 +43,26 @@ This project demonstrates how modern AI automation can replace repetitive custom
 
 # 📸 Screenshots
 
-## Customer Support Form
+### Customer Support Form
 
-![Customer Support Form](assets/screenshots/form.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/screenshots/form.png" width="80%">
+</p>
+---
+
+### Google Sheets Conversation Log
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/screenshots/google-sheet.png" width="100%">
+</p>
 
 ---
 
-## Google Sheets Conversation Log
+### Automated Email Response
 
-![Google Sheets](assets/screenshots/google-sheet.png)
-
----
-
-## Automated Email Response
-
-![Email](assets/screenshots/email.png)
+<p align="center">
+<img src="https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/screenshots/email.png" width="70%">
+</p>
 
 ---
 
