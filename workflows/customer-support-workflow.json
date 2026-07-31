@@ -1,18 +1,19 @@
 {
-  "name": "AI Customer Support Agent (public)",
+  "name": "AI Customer Support Agent (v1.1.0)",
   "nodes": [
     {
       "parameters": {
         "content": "Workflow Overview\n\n1. Receive customer request\n2. Normalize customer data\n3. Generate AI response\n4. Store conversation\n5. Send customer email",
-        "height": 208
+        "height": 208,
+        "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        496,
+        912,
         -256
       ],
       "typeVersion": 1,
-      "id": "724fb6cc-1136-4017-97f9-fddb18f2a86e",
+      "id": "8a3fb425-9623-44f4-a28e-4186d5d83e2a",
       "name": "Sticky Note"
     },
     {
@@ -26,24 +27,30 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        496,
+        912,
         -32
       ],
-      "id": "0ede21dc-dca1-4d1c-9e76-78db4c679d9d",
+      "id": "e245cbc6-2e73-4c98-b3c1-d97273099332",
       "name": "OXIVAR AI Assistant"
     },
     {
       "parameters": {
+        "modelName": "models/gemini-2.5-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.1,
       "position": [
-        496,
+        912,
         144
       ],
-      "id": "dfbc5e79-6e1e-4598-8487-a89479639f11",
-      "name": "Gemini 2.5 Flash"
+      "id": "4d8aebbe-8868-4387-a127-1c099e6816f5",
+      "name": "Gemini 2.5 Flash",
+      "credentials": {
+        "googlePalmApi": {
+          "name": "RECONNECT_REQUIRED"
+        }
+      }
     },
     {
       "parameters": {
@@ -51,74 +58,123 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "YOUR_SPREADSHEET_ID",
-          "mode": "list"
+          "value": "YOUR_GOOGLE_SHEET_ID_HERE",
+          "mode": "list",
+          "cachedResultName": "Customer Support Tickets",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID_HERE/edit"
         },
         "sheetName": {
           "__rl": true,
-          "value": "YOUR_SHEET_NAME",
-          "mode": "list"
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Tickets",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_GOOGLE_SHEET_ID_HERE/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "AI Response": "={{ $json.output }}",
-            "Full Name": "={{ $('Normalize Data').item.json.name }}",
-            "Email Address": "={{ $('Normalize Data').item.json.email }}",
-            "Customer Question": "={{ $('Normalize Data').item.json.question }}",
-            "Submitted At": "={{ $('Normalize Data').item.json.submitted_at }}"
+            "ticket_id": "={{ $('Generate Ticket').item.json.ticket_id }}",
+            "created_at": "={{ $('Generate Ticket').item.json.created_at }}",
+            "priority": "={{ $('Generate Ticket').item.json.priority }}",
+            "ticket_status": "={{ $('Generate Ticket').item.json.ticket_status }}",
+            "customer_name": "={{ $('Normalize Data').item.json.name }}",
+            "customer_email": "={{ $('Normalize Data').item.json.email }}",
+            "customer_message": "={{ $('Normalize Data').item.json.question }}",
+            "ai_reply": "={{ $json.output }}",
+            "response_sent": "yes",
+            "model": "gemini-2.5-flash"
           },
           "matchingColumns": [],
           "schema": [
             {
-              "id": "Full Name",
-              "displayName": "Full Name",
+              "id": "ticket_id",
+              "displayName": "ticket_id",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
+              "canBeUsedToMatch": true
             },
             {
-              "id": "Email Address",
-              "displayName": "Email Address",
+              "id": "created_at",
+              "displayName": "created_at",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
+              "canBeUsedToMatch": true
             },
             {
-              "id": "Customer Question",
-              "displayName": "Customer Question",
+              "id": "ticket_status",
+              "displayName": "ticket_status",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
+              "canBeUsedToMatch": true
             },
             {
-              "id": "AI Response",
-              "displayName": "AI Response",
+              "id": "priority",
+              "displayName": "priority",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
+              "canBeUsedToMatch": true
             },
             {
-              "id": "Submitted At",
-              "displayName": "Submitted At",
+              "id": "customer_name",
+              "displayName": "customer_name",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "customer_email",
+              "displayName": "customer_email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "customer_message",
+              "displayName": "customer_message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ai_reply",
+              "displayName": "ai_reply",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "model",
+              "displayName": "model",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "response_sent",
+              "displayName": "response_sent",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
             }
           ],
           "attemptToConvertTypes": false,
@@ -129,18 +185,22 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        880,
+        1296,
         -128
       ],
-      "id": "0ec09dde-7ff4-4a5f-94b1-a646bc631925",
-      "name": "Store Conversation"
+      "id": "81e40966-1c1e-477f-9a6d-8a579a270a71",
+      "name": "Store Conversation",
+      "credentials": {
+        "googleApi": {
+          "name": "RECONNECT_REQUIRED"
+        }
+      }
     },
     {
       "parameters": {
-        "authentication": "serviceAccount",
         "sendTo": "={{ $('Normalize Data').item.json.email }}",
-        "subject": "Your Support Request - OXIVAR AI",
-        "message": "=<!DOCTYPE html>\n<html>\n\n<head>\n<meta charset=\"UTF-8\">\n</head>\n\n<body style=\"margin:0;padding:0;background:#f4f7fb;font-family:Arial,Helvetica,sans-serif;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f4f7fb;padding:40px 0;\">\n\n<tr>\n<td align=\"center\">\n\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);\">\n\n<tr>\n\n<td style=\"background:#1f5fbf;padding:30px;text-align:center;\">\n\n<img\nsrc=\"https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/assets/logo-horizontal.png\"\nalt=\"OXIVAR AI\"\nstyle=\"height:55px;display:block;margin:auto;\">\n\n</td>\n\n</tr>\n\n<tr>\n\n<td style=\"padding:40px;\">\n\n<h2 style=\"margin-top:0;color:#111827;\">\n\nHello {{ $('Normalize Data').item.json.name }},\n\n</h2>\n\n<p style=\"font-size:16px;color:#4b5563;line-height:1.7;\">\n\nThank you for contacting <strong>OXIVAR AI</strong>.\n\n</p>\n\n<p style=\"font-size:16px;color:#4b5563;line-height:1.7;\">\n\nOur AI Customer Support Assistant has successfully received your request and generated the following response.\n\n</p>\n\n<div style=\"margin:35px 0;padding:20px;background:#f8fafc;border-left:5px solid #1f5fbf;border-radius:8px;\">\n\n<p style=\"margin:0;font-size:14px;color:#6b7280;font-weight:bold;\">\n\nCUSTOMER QUESTION\n\n</p>\n\n<p style=\"margin-top:12px;font-size:16px;color:#111827;line-height:1.7;\">\n\n{{ $('Normalize Data').item.json.question }}\n\n</p>\n\n</div>\n\n<div style=\"margin:35px 0;padding:20px;background:#eef5ff;border-left:5px solid #2563eb;border-radius:8px;\">\n\n<p style=\"margin:0;font-size:14px;color:#2563eb;font-weight:bold;\">\n\nAI ASSISTANT RESPONSE\n\n</p>\n\n<p style=\"margin-top:12px;font-size:16px;color:#111827;line-height:1.8;white-space:pre-line;\">\n\n{{ $json.output }}\n\n</p>\n\n</div>\n\n<p style=\"font-size:15px;color:#4b5563;line-height:1.7;\">\n\nIf you need any additional assistance or have further questions, simply reply to this email.\n\nOur team will be happy to assist you.\n\n</p>\n\n<hr style=\"border:none;border-top:1px solid #e5e7eb;margin:35px 0;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n\n<tr>\n\n<td width=\"70\">\n\n<img\nsrc=\"https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/assets/logo-horizontal.png\"\nalt=\"OXIVAR AI\"\nstyle=\"height:45px;display:block;\">\n\n</td>\n\n<td style=\"padding-left:15px;font-size:14px;color:#374151;line-height:1.7;\">\n\n<strong style=\"font-size:16px;\">\n\nOXIVAR AI\n\n</strong>\n\n<br>\n\n<span style=\"color:#6b7280;\">\n\nIntelligent Automation Solutions\n\n</span>\n\n<br><br>\n\n<span style=\"color:#6b7280;\">\n\nAI Automation \u2022 AI Agents \u2022 Workflow Automation\n\n</span>\n\n<br>\n\n<span style=\"color:#6b7280;\">\n\nBusiness Intelligence Solutions\n\n</span>\n\n</td>\n\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #e5e7eb;margin:35px 0;\">\n\n<p style=\"font-size:12px;color:#9ca3af;text-align:center;line-height:1.6;\">\n\nThis email was generated automatically by the OXIVAR AI Customer Support Agent.\n\n<br>\n\n\u00a9 2026 OXIVAR AI. All rights reserved.\n\n</p>\n\n</td>\n\n</tr>\n\n</table>\n\n</td>\n\n</tr>\n\n</table>\n\n</body>\n\n</html>",
+        "subject": "=Support Request Received | {{ $('Generate Ticket').item.json.ticket_id }} | OXIVAR AI",
+        "message": "=<!DOCTYPE html>\n<html>\n\n<head>\n<meta charset=\"UTF-8\">\n</head>\n\n<body style=\"margin:0;padding:0;background:#f4f7fb;font-family:Arial,Helvetica,sans-serif;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f4f7fb;padding:40px 0;\">\n\n<tr>\n<td align=\"center\">\n\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);\">\n\n<tr>\n\n<td style=\"background:#1f5fbf;padding:30px;text-align:center;\">\n\n<img\nsrc=\"https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/assets/logo-horizontal.png\"\nalt=\"OXIVAR AI\"\nstyle=\"height:55px;display:block;margin:auto;\">\n\n</td>\n\n</tr>\n\n<tr>\n\n<td style=\"padding:40px;\">\n\n<h2 style=\"margin-top:0;color:#111827;\">\n\nHello {{ $('Normalize Data').item.json.name }},\n\n</h2>\n\n<p style=\"font-size:16px;color:#4b5563;line-height:1.7;\">\n\nThank you for contacting <strong>OXIVAR AI</strong>.\n\n</p>\n\n<p style=\"font-size:16px;color:#4b5563;line-height:1.7;\">\n\nOur AI Customer Support Assistant has successfully received your request and generated the following response.\n\n</p>\n\n<div style=\"margin:35px 0;padding:20px;background:#f9fafb;border:1px solid #dbeafe;border-radius:8px;\">\n\n<p style=\"margin:0;font-size:14px;color:#2563eb;font-weight:bold;\">\nSUPPORT TICKET\n</p>\n\n<table style=\"margin-top:15px;font-size:15px;color:#111827;line-height:1.8;\">\n\n<tr>\n<td><strong>Ticket ID:</strong></td>\n<td>{{ $('Generate Ticket').item.json.ticket_id }}</td>\n</tr>\n\n<tr>\n<td><strong>Status:</strong></td>\n<td>{{ $('Generate Ticket').item.json.ticket_status }}</td>\n</tr>\n\n<tr>\n<td><strong>Priority:</strong></td>\n<td>{{ $('Generate Ticket').item.json.priority }}</td>\n</tr>\n\n<tr>\n<td><strong>Created:</strong></td>\n<td>{{ $('Generate Ticket').item.json.created_at }}</td>\n</tr>\n\n</table>\n\n</div>\n\n<div style=\"margin:35px 0;padding:20px;background:#f8fafc;border-left:5px solid #1f5fbf;border-radius:8px;\">\n\n<p style=\"margin:0;font-size:14px;color:#6b7280;font-weight:bold;\">\n\nCUSTOMER QUESTION\n\n</p>\n\n<p style=\"margin-top:12px;font-size:16px;color:#111827;line-height:1.7;\">\n\n{{ $('Normalize Data').item.json.question }}\n\n</p>\n\n</div>\n\n<div style=\"margin:35px 0;padding:20px;background:#eef5ff;border-left:5px solid #2563eb;border-radius:8px;\">\n\n<p style=\"margin:0;font-size:14px;color:#2563eb;font-weight:bold;\">\n\nAI ASSISTANT RESPONSE\n\n</p>\n\n<p style=\"margin-top:12px;font-size:16px;color:#111827;line-height:1.8;white-space:pre-line;\">\n\n{{ $json.output }}\n\n</p>\n\n</div>\n\n<p style=\"font-size:15px;color:#4b5563;line-height:1.7;\">\n\nIf you need any additional assistance or have further questions, simply reply to this email and include your <strong>Ticket ID</strong> for faster support.\n\nOur team will be happy to assist you.\n\n</p>\n\n<hr style=\"border:none;border-top:1px solid #e5e7eb;margin:35px 0;\">\n\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n\n<tr>\n\n<td width=\"70\">\n\n<img\nsrc=\"https://raw.githubusercontent.com/engmohamadsamer-netizen/ai-customer-support-agent/main/assets/logo-horizontal.png\"\nalt=\"OXIVAR AI\"\nstyle=\"height:45px;display:block;\">\n\n</td>\n\n<td style=\"padding-left:15px;font-size:14px;color:#374151;line-height:1.7;\">\n\n<strong style=\"font-size:16px;\">\n\nOXIVAR AI\n\n</strong>\n\n<br>\n\n<span style=\"color:#6b7280;\">\n\nIntelligent Automation Solutions\n\n</span>\n\n<br><br>\n\n<span style=\"color:#6b7280;\">\n\nAI Automation • AI Agents • Workflow Automation\n\n</span>\n\n<br>\n\n<span style=\"color:#6b7280;\">\n\nBusiness Intelligence Solutions\n\n</span>\n\n</td>\n\n</tr>\n\n</table>\n\n<hr style=\"border:none;border-top:1px solid #e5e7eb;margin:35px 0;\">\n\n<p style=\"font-size:12px;color:#9ca3af;text-align:center;line-height:1.6;\">\n\nThis email was generated automatically by the OXIVAR AI Customer Support Agent.\n\n<br>\n\n© 2026 OXIVAR AI. All rights reserved.\n\n</p>\n\n</td>\n\n</tr>\n\n</table>\n\n</td>\n\n</tr>\n\n</table>\n\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -148,12 +208,17 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        880,
+        1296,
         112
       ],
-      "id": "45ee1825-adf5-4f85-b4e3-15d279ed2fa1",
+      "id": "9817d805-b21b-4f63-b969-602b03dab4da",
       "name": "Send Customer Reply",
-      "webhookId": "96a5b4f9-b637-40a3-bff0-7ebf39ebef05"
+      "webhookId": "YOUR_WEBHOOK_ID_HERE",
+      "credentials": {
+        "gmailOAuth2": {
+          "name": "RECONNECT_REQUIRED"
+        }
+      }
     },
     {
       "parameters": {
@@ -162,29 +227,29 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -176,
-        -272
+        112,
+        -224
       ],
       "typeVersion": 1,
-      "id": "f4035875-c15f-47ed-b5d0-f53c55ecf3e6",
+      "id": "01d33f5c-cf1b-44c2-a0c4-166b492fda11",
       "name": "Sticky Note1"
     },
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "customer-support",
+        "path": "YOUR_WEBHOOK_PATH_HERE",
         "responseMode": "lastNode",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        80,
+        256,
         -32
       ],
-      "id": "8b233769-cc91-4706-8997-3290de841a29",
+      "id": "0620fae2-6927-4eec-b6ab-4db64220f22c",
       "name": "Receive Request",
-      "webhookId": "662b0fe1-2315-47a3-be21-449dd710f139"
+      "webhookId": "YOUR_WEBHOOK_ID_HERE"
     },
     {
       "parameters": {
@@ -193,19 +258,19 @@
             {
               "id": "80dbb02f-aeb3-4c67-b40d-e0d04f24e077",
               "name": "name",
-              "value": "={{$json.body.name}}",
+              "value": "={{ $('Receive Request').item.json.body.name }}",
               "type": "string"
             },
             {
               "id": "d6ec2dff-dd60-4147-bbe4-07cef569130b",
               "name": "email",
-              "value": "={{$json.body.email}}",
+              "value": "={{ $('Receive Request').item.json.body.email }}",
               "type": "string"
             },
             {
               "id": "dc03feb5-3da0-48b5-b39d-a68d26b81e01",
               "name": "question",
-              "value": "={{$json.body.question}}",
+              "value": "={{ $('Receive Request').item.json.body.question }}",
               "type": "string"
             },
             {
@@ -221,11 +286,52 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        288,
+        704,
         -32
       ],
-      "id": "739616a5-a693-410e-9623-4e556bd98edb",
+      "id": "eacbe248-658d-440b-b22f-830a3d173a37",
       "name": "Normalize Data"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9e85acc1-462a-4f48-9266-ed78de3807ed",
+              "name": "ticket_id",
+              "value": "={{ \"TCK-\" + Date.now() }}",
+              "type": "string"
+            },
+            {
+              "id": "4fda1b23-08b1-4183-836b-7753d8b524ed",
+              "name": "ticket_status",
+              "value": "new",
+              "type": "string"
+            },
+            {
+              "id": "6ae5cc9a-6a02-4d9c-ae07-ee9151ce3f49",
+              "name": "created_at",
+              "value": "={{ new Date().toISOString() }}",
+              "type": "string"
+            },
+            {
+              "id": "ec704701-c2f4-444b-a535-bcf8f6eb91cd",
+              "name": "priority",
+              "value": "Normal",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        480,
+        -32
+      ],
+      "id": "1cf632be-793d-44d0-b98e-30cf6fe8be57",
+      "name": "Generate Ticket"
     }
   ],
   "pinData": {},
@@ -261,7 +367,7 @@
       "main": [
         [
           {
-            "node": "Normalize Data",
+            "node": "Generate Ticket",
             "type": "main",
             "index": 0
           }
@@ -278,6 +384,17 @@
           }
         ]
       ]
+    },
+    "Generate Ticket": {
+      "main": [
+        [
+          {
+            "node": "Normalize Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
@@ -285,6 +402,10 @@
     "executionOrder": "v1",
     "binaryMode": "separate",
     "availableInMCP": false
+  },
+  "versionId": "bda5c56c-9284-4faf-a1e4-f41b556d0077",
+  "meta": {
+    "templateCredsSetupCompleted": true
   },
   "nodeGroups": [],
   "tags": []
