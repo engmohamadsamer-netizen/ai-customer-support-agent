@@ -20,11 +20,9 @@ Features included:
 
 ---
 
-## v1.1.0 - Coming Soon
-
-Planned improvements:
-
-- Ticket ID Generation
-- Ticket Status Tracking
-- Prompt Engineering Improvements
-- Better Conversation Management
+## v1.1.0 - Ticket Tracking & Prompt Enhancement
+### Added
+- Ticket ID generation
+- Conversation status tracking
+- Created timestamp logging
+- Improved AI prompt handling
