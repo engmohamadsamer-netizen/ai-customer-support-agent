@@ -28,7 +28,9 @@ This project demonstrates how modern AI automation can replace repetitive custom
 - ⚡ Fully automated n8n workflow
 - 🌐 Responsive HTML customer portal
 - 🧩 Modular workflow ready for future expansion
-
+- 🎫 Automatic Ticket ID generation
+- 📌 Conversation status tracking
+- 🕒 Request creation timestamp
 ---
 
 # 🏗 Workflow Architecture
@@ -50,6 +52,7 @@ This project demonstrates how modern AI automation can replace repetitive custom
 | 📧 Gmail Integration | Sends professional HTML email replies |
 | 📁 Clean Data Processing | Customer data normalization before AI processing |
 | ♻️ Modular Workflow | Easily adaptable and expandable |
+| 🎫 Ticket Management | Automatic ticket ID and status tracking |
 
 ---
 
@@ -220,7 +223,7 @@ Submit a customer request from the HTML form and watch the entire automation exe
 
 ---
 
-## 🚀 Version 1.1
+## ✅ Version 1.1
 
 - Ticket ID Generation
 - Conversation Status
